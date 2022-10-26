@@ -5,14 +5,11 @@ function Image() {
 
     const cake = [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }];
 
-    const li = document.querySelector(".img_content");
-
-    const liR = useRef(li);
     const rotate = () => {
         setClickOn(!clickOn);
-        !clickOn ? (liR.current.style.transform = "rotateY(180deg)") : (liR.current.style.transform = "rotateY(0deg)");
+        const li = document.querySelector(".img_content");
+        !clickOn ? (li.style.transform = "rotateY(180deg)") : (li.style.transform = "rotateY(0deg)");
     };
-    //console.log(liR);
 
     const scale = (e) => {
         e.target.style.transform = "scale(0.9)";
@@ -31,7 +28,7 @@ function Image() {
     return (
         <ul className="img_box">
             {cake.map((num) => (
-                <li className="img_content" onClick={rotate} onMouseEnter={scale} onMouseLeave={reset} ref={liR}>
+                <li className="img_content" onClick={rotate} onMouseEnter={scale} onMouseLeave={reset}>
                     <img key={num.id} src={"/img/" + num.id + ".jpg"} alt={num.id}></img>
                 </li>
             ))}
