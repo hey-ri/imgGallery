@@ -19,6 +19,14 @@ function App() {
             <div className="container">
                 <h1>Click the photo</h1>
                 <ImageGallery src={imageUrls}></ImageGallery>
+                <div className="test">
+                    <div className="">
+                        <p style={{ color: "white" }}>Hello</p>
+                    </div>
+                    <div className="backface-hidden">
+                        <img src="img/3.jpg" alt="test" />
+                    </div>
+                </div>
             </div>
         </div>
     );
