@@ -16,7 +16,7 @@ function GalleryItem({ activeItemIndex, selectedItem, partSize, margins, i, url 
     return (
         <div
             className="img_content"
-            style={{ "--s": activeItemIndex === i ? 0.9 : 1 }}
+            style={{ "--s": { activeItemIndex } === { i } ? 0.9 : 1 }}
             onMouseEnter={() => onMouseHover(i)}
             onMouseLeave={onMouseLeave}
         >
@@ -26,8 +26,8 @@ function GalleryItem({ activeItemIndex, selectedItem, partSize, margins, i, url 
                     style={{
                         backgroundImage: `url(${selectedItem})`,
                         transform: `translate(
-                        ${-(i % cols) * (partSize.w + margins)}px,
-                        ${-Math.floor(i / cols) * (partSize.h + margins)}px
+                        ${-({ i } % { cols }) * ({ partSize }.w + { margins })}px,
+                        ${-Math.floor({ i } / { cols }) * ({ partSize }.h + { margins })}px
                     )`,
                     }}
                 ></div>
