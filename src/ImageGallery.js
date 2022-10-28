@@ -1,8 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import Img from "./Img";
+import GalleryItem from "./GalleryItem";
 
 const nomal = "0deg";
 const reverse = "180deg";
+const borderRadius = 10;
+const partSize = { w: 300, h: 200 };
+const margins = 10;
+const rows = 3;
+const cols = 3;
 
 function ImageGallery({ src }) {
     // 각각의 이미지의 앞면을 보여주는 상태
@@ -10,10 +15,12 @@ function ImageGallery({ src }) {
 
     // 마우스가 올라가있는 이미지의 인덱스
     const [activeItemIndex, setActiveIndex] = useState(-1);
+    const [selectedItem, setSelectedItem] = useState("");
 
-    const onContentClick = (e) => {
+    const onContentClick = (url) => {
         // 상태값 토글
         setIsFront((v) => !v);
+        setSelectedItem(url);
     };
 
     const onMouseHover = (index) => {
@@ -24,35 +31,33 @@ function ImageGallery({ src }) {
         setActiveIndex(-1);
     };
 
-    //이미지 클릭한 것으로 바뀌게 하기위한 로직 미완성
-
-    /*  const allimg = useRef();
-
-    useEffect(() => {
-        if (current) {
-            allimg.current = cake.id;
-        }
-    }, [clickOn]); */
-
     return (
-        <ul className="img_gallery" style={{ "--r": isFront ? nomal : reverse }}>
+        <div className="img_gallery" style={{ "--r": isFront ? nomal : reverse }}>
             {src.map((url, i) => (
-                <li
+                <div
                     className="img_content"
                     style={{ "--s": activeItemIndex === i ? 0.9 : 1 }}
                     key={i}
-                    onClick={onContentClick}
+                    onClick={() => onContentClick(url)}
                     onMouseEnter={() => onMouseHover(i)}
                     onMouseLeave={onMouseLeave}
                 >
-                    <div className="back">
-                        <div className="back_inner"></div>
+                    <div className="back backface-hidden">
+                        <div
+                            className="back_inner"
+                            style={{
+                                backgroundImage: `url(${selectedItem})`,
+                                transform: `translate(
+                                    ${-(i % cols) * (partSize.w + margins)}px,
+                                    ${-Math.floor(i / cols) * (partSize.h + margins)}px
+                                )`,
+                            }}
+                        ></div>
                     </div>
-                    <div className="front" style={{ backgroundImage: url }}></div>
-                    {/* <img src={url} alt={url}></img> */}
-                </li>
+                    <div className="front backface-hidden" style={{ "--url": `url(${url})` }}></div>
+                </div>
             ))}
-        </ul>
+        </div>
     );
 }
 
