@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import GalleryItem from "./GalleryItem";
 
 const nomal = "0deg";
@@ -15,18 +15,18 @@ function ImageGallery({ src }) {
 
     const [selectedItemUrl, setSelectedItemUrl] = useState("");
 
-    const onContentSelect = (url) => {
+    const onContentSelect = useCallback((url) => {
         // 상태값 토글
         setIsFront((v) => !v);
         setSelectedItemUrl(url);
-    };
+    }, []);
 
     return (
         <div className="img_gallery" style={{ "--rotation": !isFront ? nomal : reverse }}>
-            {src.map((url, i) => (
+            {src.map((eachUrl, i) => (
                 <GalleryItem
                     key={i}
-                    url={url}
+                    url={eachUrl}
                     onSelect={onContentSelect}
                     selectedItemUrl={selectedItemUrl}
                     index={i}
