@@ -22,8 +22,7 @@ h1 {
     --margins: 10px;
     --rows: 3;
     --cols: 3;
-    --s: ;
-    --r: 0deg;
+    --rotation: 0deg;
     width: 920px;
     margin: 0 auto;
     display: flex;
@@ -37,14 +36,14 @@ h1 {
 }
 
 .img_content {
-    --s: 1;
+    --scale: 1;
     width: 300px;
     height: 200px;
     cursor: pointer;
     transition: all .7s;
     position: relative;
     transform-style: preserve-3d;
-    transform: rotateY(var(--r)) scale(var(--s));
+    transform: rotateY(var(--rotation)) scale(var(--scale));
     border-radius: var(--border-radius);
 }
 
@@ -126,11 +125,7 @@ h1 {
     height: 100%;
 }
 
-.img_click {
-    transform: rotateY(180deg);
-}
-
-.test {
+/* .test {
     position: relative;
     transform-origin: 50% 50%;
     transform-style: preserve-3d;
@@ -140,7 +135,7 @@ h1 {
     width: 300px;
     height: 300px;
 }
-
+ 
 .test>div {
     position: absolute;
     width: 100%;
@@ -152,3 +147,4 @@ h1 {
     height: 100%;
 
 }
+*/

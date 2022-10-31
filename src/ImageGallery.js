@@ -3,48 +3,35 @@ import GalleryItem from "./GalleryItem";
 
 const nomal = "0deg";
 const reverse = "180deg";
-const borderRadius = 10;
-const partSize = { w: 300, h: 200 };
-const margins = 10;
-const rows = 3;
-const cols = 3;
+const partInfo = {
+    partSize: { w: 300, h: 200 },
+    cols: 3,
+    margins: 10,
+};
 
-function ImageGallery({ src, setSelectedItem }) {
+function ImageGallery({ src }) {
     // 각각의 이미지의 앞면을 보여주는 상태
     const [isFront, setIsFront] = useState(false);
 
-    const onContentClick = (url) => {
+    const [selectedItemUrl, setSelectedItemUrl] = useState("");
+
+    const onContentSelect = (url) => {
         // 상태값 토글
         setIsFront((v) => !v);
-        setSelectedItem(url);
+        setSelectedItemUrl(url);
     };
 
     return (
-        <div className="img_gallery" style={{ "--r": !isFront ? nomal : reverse }}>
+        <div className="img_gallery" style={{ "--rotation": !isFront ? nomal : reverse }}>
             {src.map((url, i) => (
-                /* <div
-                    className="img_content"
-                    style={{ "--s": activeItemIndex === i ? 0.9 : 1 }}
+                <GalleryItem
                     key={i}
-                    onClick={() => onContentClick(url)}
-                    onMouseEnter={() => onMouseHover(i)}
-                    onMouseLeave={onMouseLeave}
-                >
-                    <div className="back backface-hidden">
-                        <div
-                            className="back_inner"
-                            style={{
-                                backgroundImage: `url(${selectedItem})`,
-                                transform: `translate(
-                                    ${-(i % cols) * (partSize.w + margins)}px,
-                                    ${-Math.floor(i / cols) * (partSize.h + margins)}px
-                                )`,
-                            }}
-                        ></div>
-                    </div>
-                    <div className="front backface-hidden" style={{ "--url": `url(${url})` }}></div>
-                </div> */
-                <GalleryItem onClick={() => onContentClick} />
+                    url={url}
+                    onSelect={onContentSelect}
+                    selectedItemUrl={selectedItemUrl}
+                    index={i}
+                    partInfo={partInfo}
+                ></GalleryItem>
             ))}
         </div>
     );
