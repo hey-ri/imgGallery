@@ -7,6 +7,7 @@ function GalleryItem({
     selectedItemUrl,
     partInfo: { partSize = { w: 300, h: 200 }, margins = 10, cols = 3 },
     onSelect,
+    delay,
 }) {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -21,7 +22,7 @@ function GalleryItem({
     return (
         <div
             className="img_content"
-            style={{ "--scale": isHovered ? 0.9 : 1 }}
+            style={{ "--scale": isHovered ? 0.9 : 1, "--delay": `${delay}ms` }}
             onClick={() => onSelect(url)}
             onMouseEnter={onMouseHover}
             onMouseLeave={onMouseLeave}
@@ -57,4 +58,5 @@ GalleryItem.propTypes = {
         cols: PropTypes.number,
     },
     onSelect: PropTypes.func,
+    delay: PropTypes.number,
 };

@@ -1,5 +1,5 @@
-import { useCallback, useState } from "react";
 import GalleryItem from "./GalleryItem";
+import useImageGallery from "./hooks/useImageGallery";
 
 const nomal = "0deg";
 const reverse = "180deg";
@@ -10,16 +10,7 @@ const partInfo = {
 };
 
 function ImageGallery({ src }) {
-    // 각각의 이미지의 앞면을 보여주는 상태
-    const [isFront, setIsFront] = useState(false);
-
-    const [selectedItemUrl, setSelectedItemUrl] = useState("");
-
-    const onContentSelect = useCallback((url) => {
-        // 상태값 토글
-        setIsFront((v) => !v);
-        setSelectedItemUrl(url);
-    }, []);
+    const { isFront, selectedItemUrl, onContentSelect } = useImageGallery([]);
 
     return (
         <div className="img_gallery" style={{ "--rotation": !isFront ? nomal : reverse }}>
@@ -27,6 +18,7 @@ function ImageGallery({ src }) {
                 <GalleryItem
                     key={i}
                     url={eachUrl}
+                    delay={isFront ? 0 : 50 * i}
                     onSelect={onContentSelect}
                     selectedItemUrl={selectedItemUrl}
                     index={i}

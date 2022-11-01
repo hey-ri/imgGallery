@@ -37,10 +37,12 @@ h1 {
 
 .img_content {
     --scale: 1;
+    --delay: 0ms;
     width: 300px;
     height: 200px;
     cursor: pointer;
     transition: all .7s;
+    transition-delay: var(--delay);
     position: relative;
     transform-style: preserve-3d;
     transform: rotateY(var(--rotation)) scale(var(--scale));
