@@ -11,32 +11,38 @@ const partInfo = {
     margins: 4,
 };
 
-function ImageGallery({ src, index, delay }) {
-    const [isFirstTime, setIsFirstTime] = useState(true);
-    const [title, setTitle] = useState("Choose a photo");
+const titles = [
+    "Choose a photo",
+    "222222",
+    <span>
+        333333{" "}
+        <a href="https://google.com" target="_blank">
+            Google
+        </a>
+    </span>,
+];
 
+function ImageGallery({ src, index, delay }) {
     const { isFront, selectedItemUrl, onContentSelect, setIsFront, selectedItemIndex } = useImageGallery(src, []);
 
+    const [title, setTitle] = useState(titles[0]);
     const getTransitionDelay = (i) => {
         console.log({ i, selectedItemIndex });
 
         return (selectedItemIndex - i) * 60;
-
-        return 0;
     };
 
     useEffect(() => {
-        if (isFirstTime && !isFront) {
-            setIsFirstTime(false);
-            setTitle("222222");
-        } else if (isFront && title === "222222") {
-            setTitle("33333");
+        if (title === titles[0] && !isFront) {
+            setTitle(titles[1]);
+        } else if (isFront && title === titles[1]) {
+            setTitle(titles[2]);
         }
-    }, [isFront, isFirstTime, title, setTitle]);
+    }, [isFront, title, setTitle]);
 
     return (
         <>
-            <h1 onClick={onContentSelect}>{title}</h1>
+            <h1>{title}</h1>
             <div
                 className="img_gallery"
                 style={{
