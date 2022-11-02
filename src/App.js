@@ -1,5 +1,4 @@
 import "./App.css";
-import useImageGallery from "./hooks/useImageGallery";
 import ImageGallery from "./ImageGallery";
 
 const imageUrls = [
