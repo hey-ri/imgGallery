@@ -1,13 +1,15 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+import useImageGallery from "./hooks/useImageGallery";
 
 function GalleryItem({
     url,
     index,
     selectedItemUrl,
-    partInfo: { partSize = { w: 300, h: 200 }, margins = 10, cols = 3 },
+    partInfo: { partSize = { w: 100, h: 100 }, margins = 4, cols = 6 },
     onSelect,
     delay,
+    isFront,
 }) {
     const [isHovered, setIsHovered] = useState(false);
 
@@ -21,8 +23,11 @@ function GalleryItem({
 
     return (
         <div
-            className="img_content"
-            style={{ "--scale": isHovered ? 0.9 : 1, "--delay": `${delay}ms` }}
+            className={`img_content ${isFront ? "active" : ""}`}
+            style={{
+                "--scale": isFront && isHovered ? 0.97 : 1,
+                "--delay": `${delay}ms`,
+            }}
             onClick={() => onSelect(url)}
             onMouseEnter={onMouseHover}
             onMouseLeave={onMouseLeave}
@@ -51,6 +56,7 @@ export default GalleryItem;
 GalleryItem.propTypes = {
     url: PropTypes.string,
     index: PropTypes.number,
+    isFront: PropTypes.bool,
     selectedItemUrl: PropTypes.string,
     partInfo: {
         partSize: { w: PropTypes.number, h: PropTypes.number },
