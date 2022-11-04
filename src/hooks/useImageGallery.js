@@ -11,18 +11,12 @@ function useImageGallery(src, dep) {
     const [selectedItemUrl, setSelectedItemUrl] = useState("");
 
     const onContentSelect = useCallback((url) => {
+        //console.log({ isFront, url });
         // 상태값 토글
         setIsFront((v) => !v);
         setSelectedItemUrl(url);
         setSelectedItemIndex(src.indexOf(url));
     }, dep);
-
-    /*   //뒷면일 때 상황 제어
-    const backNochangeUrl = (url) => {
-        if (!isFront) {
-            setSelectedItemIndex(url);
-        }
-    }; */
 
     return { isFront, selectedItemUrl, onContentSelect, setIsFront, selectedItemIndex };
 }
