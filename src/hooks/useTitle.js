@@ -6,6 +6,7 @@ function useTitle(isFront) {
 
     useEffect(() => {
         if (titleIndex === 0 && !isFront) {
+            //true, false일 때를 상식적으로 생각하기 보단, 인덱스의 글자가 0이고, 뒷면일 때로 생각해야 편함
             setTitleIndex(1);
         } else if (isFront && titleIndex === 1) {
             setTitleIndex(2);
