@@ -4,6 +4,7 @@ import useTitle from "./hooks/useTitle";
 
 const nomal = "0deg";
 const reverse = "180deg";
+const delayMs = 230;
 const partInfo = {
     partSize: { w: 100, h: 100 },
     cols: 6,
@@ -31,14 +32,14 @@ function ImageGallery({ src }) {
     const { titleIndex } = useTitle(isFront); //(isFront)는 useTitle에 보내주는 값이 맞는가?
 
     const getTransitionDelay = (i) => {
-        console.log({ i, selectedItemIndex });
+        const x = i % partInfo.cols;
+        const y = Math.floor(i / partInfo.cols);
 
-        return (
-            Math.sqrt(
-                Math.pow(selectedItemIndex - partInfo.cols, 2) + Math.pow(selectedItemIndex - i, 2) /* +
-                    Math.pow(selectedItemIndex - partInfo.rows, 2) + Math.pow(selectedItemIndex - i, 2) */
-            ) * 30
-        );
+        const sx = selectedItemIndex % partInfo.cols;
+        const sy = Math.floor(selectedItemIndex / partInfo.cols);
+        const dist = Math.abs(Math.sqrt(Math.pow(sx - x, 2) + Math.pow(sy - y, 2)));
+
+        return dist;
     };
 
     return (
@@ -56,7 +57,7 @@ function ImageGallery({ src }) {
                         key={i}
                         url={eachUrl}
                         isFront={isFront}
-                        delay={isFront ? 30 * i : getTransitionDelay(i)}
+                        delay={delayMs * (isFront ? i * 0.2 : getTransitionDelay(i))}
                         onSelect={onContentSelect}
                         selectedItemUrl={selectedItemUrl}
                         index={i}
