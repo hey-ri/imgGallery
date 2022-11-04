@@ -29,7 +29,7 @@ const titles = [
 function ImageGallery({ src }) {
     const { isFront, selectedItemUrl, onContentSelect, selectedItemIndex } = useImageGallery(src, []);
 
-    const { titleIndex } = useTitle(isFront); //(isFront)는 useTitle에 보내주는 값이 맞는가?
+    const { titleIndex } = useTitle(isFront); //(isFront)는 useTitle에 보내주는 값이 맞는가? Y
 
     const getTransitionDelay = (i) => {
         const x = i % partInfo.cols;
