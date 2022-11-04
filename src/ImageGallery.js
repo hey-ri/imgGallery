@@ -12,23 +12,33 @@ const partInfo = {
 };
 const titles = [
     "Choose a photo",
-    "222222",
+    "Click any of the tiles to get back",
     <span>
-        333333{" "}
-        <a href="https://google.com" target="_blank">
-            Google
+        Click out my other{" "}
+        <a href="https://codepen.io/kiyutink" target="_blank" rel="noreferrer" className="titles">
+            pens
+        </a>
+        &nbsp; and follow me on{" "}
+        <a href="https://twitter.com" target="_blank" rel="noreferrer" className="titles">
+            twitter
         </a>
     </span>,
 ];
-function ImageGallery({ src }) {
-    const { isFront, selectedItemUrl, onContentSelect, setIsFront, selectedItemIndex } = useImageGallery(src, []);
 
-    const { titleIndex } = useTitle(isFront);
+function ImageGallery({ src }) {
+    const { isFront, selectedItemUrl, onContentSelect, selectedItemIndex } = useImageGallery(src, []);
+
+    const { titleIndex } = useTitle(isFront); //(isFront)는 useTitle에 보내주는 값이 맞는가?
 
     const getTransitionDelay = (i) => {
-        //console.log({ i, selectedItemIndex });
+        console.log({ i, selectedItemIndex });
 
-        return Math.floor(selectedItemIndex - partInfo.cols - (selectedItemIndex - i)) * 60;
+        return (
+            Math.sqrt(
+                Math.pow(selectedItemIndex - partInfo.cols, 2) + Math.pow(selectedItemIndex - i, 2) /* +
+                    Math.pow(selectedItemIndex - partInfo.rows, 2) + Math.pow(selectedItemIndex - i, 2) */
+            ) * 30
+        );
     };
 
     return (
