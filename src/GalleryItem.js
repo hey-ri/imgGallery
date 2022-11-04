@@ -13,8 +13,9 @@ function GalleryItem({
 }) {
     const [isHovered, setIsHovered] = useState(false);
 
-    //완전히 돌고 나서의 상태
+    //돌고 있지 않은 상태
     const [transitionCompleted, setTransitionCompleted] = useState(true);
+    //돌고 있지 않다는 의미의 true
 
     const onMouseHover = () => {
         setIsHovered(true);
@@ -30,7 +31,7 @@ function GalleryItem({
         setTransitionCompleted(false);
         const id = setTimeout(() => {
             setTransitionCompleted(true);
-        }, 2000);
+        }, 1380);
         return () => {
             // = function clearUp(){}
             //isFront에 대한 값이 바뀔 때 settimeout이 계속 실행 되는데 clear해주지 않으면 계속 꼬임
