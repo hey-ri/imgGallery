@@ -18,7 +18,7 @@ function useImageGallery(src, dep) {
         setSelectedItemIndex(src.indexOf(url));
     }, dep);
 
-    return { isFront, selectedItemUrl, onContentSelect, setIsFront, selectedItemIndex };
+    return { isFront, selectedItemUrl, onContentSelect, selectedItemIndex };
 }
 
 export default useImageGallery;
