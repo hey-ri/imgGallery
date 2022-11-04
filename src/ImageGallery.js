@@ -39,6 +39,8 @@ function ImageGallery({ src }) {
         const sy = Math.floor(selectedItemIndex / partInfo.cols);
         const dist = Math.abs(Math.sqrt(Math.pow(sx - x, 2) + Math.pow(sy - y, 2)));
 
+        //console.log({ i, dist, x, y, sx, sy });
+
         return dist;
     };
 
