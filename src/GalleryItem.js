@@ -33,9 +33,11 @@ function GalleryItem({
             setTransitionCompleted(true);
         }, 1380);
         return () => {
-            // = function clearUp(){}
+            // = function cleanUp(){}
             //isFront에 대한 값이 바뀔 때 settimeout이 계속 실행 되는데 clear해주지 않으면 계속 꼬임
             //return문 안에는 무조건 함수가 들어가야 하는데 이 return 함수문은 clear해주는 아이인데, useEffect가 다시 실행되기 직전에 지워주는 역할이다.
+            //이 코드에서는 setTimeout때문에 사용을 하였지만 useEffect를 사용한다면 특정 effect를 시작하기 전에 지워줘야 할 때가 있을 것이다. 그럴 때 사용하는 것이다.
+            //cleanUp 함수의 작동 순서는 re-render -> 이전 effect clean-up -> effect 로 실행된다.
             clearTimeout(id);
         };
     }, [isFront]);
@@ -61,6 +63,7 @@ function GalleryItem({
             }}
             onMouseEnter={onMouseHover}
             onMouseLeave={onMouseLeave}
+            //onClick={()=>onSelect(url)}
         >
             <div className="back backface-hidden" onClick={onDeselectImage}>
                 <div
